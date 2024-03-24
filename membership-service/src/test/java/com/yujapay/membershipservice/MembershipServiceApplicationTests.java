@@ -1,10 +1,10 @@
-package com.example.yujapay;
+package com.yujapay.membershipservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class YujaPayApplicationTests {
+class MembershipServiceApplicationTests {
 
     @Test
     void contextLoads() {
