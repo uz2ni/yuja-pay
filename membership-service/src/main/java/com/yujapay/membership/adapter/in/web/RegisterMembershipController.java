@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class RegisterMembershipController {
 
-    RegisterMembershipUseCase registerMembershipUseCase;
+    private final RegisterMembershipUseCase registerMembershipUseCase;
 
     @PostMapping(path = "/membership/register")
     Membership registerMembership(@RequestBody RegisterMembershipRequest request) {
