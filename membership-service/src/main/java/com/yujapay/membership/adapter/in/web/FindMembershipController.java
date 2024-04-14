@@ -1,9 +1,9 @@
 package com.yujapay.membership.adapter.in.web;
 
+import com.yujapay.common.WebAdapter;
 import com.yujapay.membership.application.port.in.FindMembershipCommand;
 import com.yujapay.membership.application.port.in.FindMembershipUseCase;
 import com.yujapay.membership.domain.Membership;
-import common.WebAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

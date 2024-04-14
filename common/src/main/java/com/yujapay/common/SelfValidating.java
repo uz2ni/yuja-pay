@@ -1,4 +1,4 @@
-package common;
+package com.yujapay.common;
 
 import jakarta.validation.*;
 

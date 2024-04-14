@@ -1,15 +1,12 @@
 package com.yujapay.membership.application.service;
 
+import com.yujapay.common.UseCase;
 import com.yujapay.membership.adapter.out.persistence.MembershipJpaEntity;
 import com.yujapay.membership.adapter.out.persistence.MembershipMapper;
 import com.yujapay.membership.application.port.in.ModifyMembershipCommand;
 import com.yujapay.membership.application.port.in.ModifyMembershipUseCase;
-import com.yujapay.membership.application.port.in.RegisterMembershipCommand;
-import com.yujapay.membership.application.port.in.RegisterMembershipUseCase;
 import com.yujapay.membership.application.port.out.ModifyMembershipPort;
-import com.yujapay.membership.application.port.out.RegisterMembershipPort;
 import com.yujapay.membership.domain.Membership;
-import common.UseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 

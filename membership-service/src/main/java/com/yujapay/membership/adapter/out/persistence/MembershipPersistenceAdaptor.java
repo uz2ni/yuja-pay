@@ -1,10 +1,10 @@
 package com.yujapay.membership.adapter.out.persistence;
 
+import com.yujapay.common.PersistenceAdaptor;
 import com.yujapay.membership.application.port.out.FindMembershipPort;
 import com.yujapay.membership.application.port.out.ModifyMembershipPort;
 import com.yujapay.membership.application.port.out.RegisterMembershipPort;
 import com.yujapay.membership.domain.Membership;
-import common.PersistenceAdaptor;
 import lombok.RequiredArgsConstructor;
 
 @PersistenceAdaptor
