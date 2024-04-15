@@ -1,0 +1,38 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:8.0
+    networks:
+      - fastcampuspay_network
+    volumes: # :앞 경로 파일이 :뒤 경로 파일(컨테이너 내)과 매핑/동기화 된다
+      - ./db/conf.d:/etc/mysql/conf.d
+      - ./db/data:/var/lib/mysql
+      - ./db/initdb.d:/docker-entrypoint-initdb.d
+    env_file: .env # mysql 의 환경변수는 이 파일에서 지정하겠다
+    ports:
+      - "3307:3306"
+    environment:
+      - TZ=Asia/Seoul
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_USER=mysqluser
+      - MYSQL_PASSWORD=mysqlpw
+
+  membership-service:
+    image: yujapay-membership-service:1.0.4
+    networks:
+      - fastcampuspay_network
+    ports: #8081->8080 포트포워딩 한다. (좌측: os레벨에서 컨테이너까지 매핑될 포트 / 우측:컨테이너 안 실제 애플리케이션 포트)
+      - "8081:8080"
+    depends_on: # 이게 실행되어야 membership-service 가 실행될 수 있다.
+      - mysql
+    environment: # application.properties(docker desktop 환경변수) 적는 부분
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/yuja_pay?useSSL=false&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=mysqluser
+      - SPRING_DATASOURCE_PASSWORD=mysqlpw
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQLDialect
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
+
+# 브릿지 드라이버 사용해서 패스트캠퍼스페이 네트워크를 사용할거다라는 의미 (이 네트워크를 위 services 에서 사용함)
+networks:
+  fastcampuspay_network:
+    driver: bridge
