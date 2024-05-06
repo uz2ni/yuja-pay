@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'com.yujapay.membership'
-version = '1.0.4'
+version = '1.0.5'
 
 java {
     sourceCompatibility = '17'
@@ -36,8 +36,8 @@ dependencies {
     testImplementation 'junit:junit:4.13.1'
     implementation project(path: ':common')
 
-    runtimeOnly 'com.h2database:h2'
-//    runtimeOnly 'com.mysql:mysql-connector-j'
+//    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'com.mysql:mysql-connector-j'
 
 }
 
