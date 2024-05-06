@@ -16,16 +16,22 @@ public class RegisterBankAccountController {
 
     private final RegisterBankAccountUseCase registerBankAccountUseCase;
 
-    @PostMapping(path = "/membership/register")
+    @PostMapping(path = "/banking/account/register")
     RegisteredBankAccount registerBankAccount(@RequestBody RegisterBankAccountRequest request) {
 
         RegisterBankAccountCommand command = RegisterBankAccountCommand.builder()
                 .membershipId(request.getMembershipId())
                 .bankName(request.getBankName())
                 .bankAccountNumber(request.getBankAccountNumber())
-                .linkedStatusIsValid(request.isLinkedStatusIsValid())
+                .linkedStatusIsValid(request.isValid())
                 .build();
 
-        return registerBankAccountUseCase.registerBankAccount(command);
+        RegisteredBankAccount registeredBankAccount = registerBankAccountUseCase.registerBankAccount(command);
+
+        if(registeredBankAccount == null) {
+            // TODO: Error handling
+            return null;
+        }
+        return registeredBankAccount;
     }
 }

@@ -18,7 +18,7 @@ public class RegisteredBankAccountJpaEntity {
 
     @Id
     @GeneratedValue
-    private String registeredBankAccountId;
+    private Long registeredBankAccountId;
 
     private String membershipId;
 

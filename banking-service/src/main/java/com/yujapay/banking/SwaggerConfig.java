@@ -14,8 +14,8 @@ public class SwaggerConfig {
         return new OpenAPI()
                 .components(new Components())
                 .info(new Info()
-                        .title("멤버십 서비스 API")
-                        .description("멤버십 관련 기능 제공")
+                        .title("뱅킹 서비스 API")
+                        .description("뱅킹 관련 기능 제공")
                         .version("1.0.0"));
     }
 }
