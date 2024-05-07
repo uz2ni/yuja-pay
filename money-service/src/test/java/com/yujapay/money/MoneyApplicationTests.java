@@ -1,10 +1,10 @@
-package com.yujapay.moneyservice;
+package com.yujapay.money;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MoneyServiceApplicationTests {
+class MoneyApplicationTests {
 
     @Test
     void contextLoads() {

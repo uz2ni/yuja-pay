@@ -1,13 +1,13 @@
-package com.yujapay.moneyservice;
+package com.yujapay.money;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MoneyServiceApplication {
+public class MoneyApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MoneyServiceApplication.class, args);
+        SpringApplication.run(MoneyApplication.class, args);
     }
 
 }
