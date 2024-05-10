@@ -18,7 +18,7 @@ services:
       - MYSQL_PASSWORD=mysqlpw
 
   membership-service:
-    image: yujapay-membership-service:1.0.5
+    image: yujapay-membership-service:1.0.0
     networks:
       - fastcampuspay_network
     ports: #8081->8080 포트포워딩 한다. (좌측: os레벨에서 컨테이너까지 매핑될 포트 / 우측:컨테이너 안 실제 애플리케이션 포트)
@@ -31,6 +31,8 @@ services:
       - SPRING_DATASOURCE_PASSWORD=mysqlpw
       - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQLDialect
       - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
+      - KAFKA_CLUSTERS_BOOTSTRAPSERVERS=kafka:29092
+      - LOGGING_TOPIC=fastcampus.logging.out.stdout
 
   money-service:
     image: yujapay-money-service:1.0.0
@@ -46,6 +48,8 @@ services:
       - SPRING_DATASOURCE_PASSWORD=mysqlpw
       - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQLDialect
       - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
+      - KAFKA_CLUSTERS_BOOTSTRAPSERVERS=kafka:29092
+      - LOGGING_TOPIC=fastcampus.logging.out.stdout
 
   banking-service:
     image: yujapay-banking-service:1.0.0
@@ -61,6 +65,8 @@ services:
       - SPRING_DATASOURCE_PASSWORD=mysqlpw
       - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQLDialect
       - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
+      - KAFKA_CLUSTERS_BOOTSTRAPSERVERS=kafka:29092
+      - LOGGING_TOPIC=fastcampus.logging.out.stdout
 
   zookeeper:
     image: 'arm64v8/zookeeper:3.8'
