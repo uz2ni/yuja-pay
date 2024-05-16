@@ -7,9 +7,11 @@ import com.yujapay.money.application.port.out.SendRechargingMoneyTaskPort;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.Properties;
 
+@Component
 public class TaskProducer implements SendRechargingMoneyTaskPort {
 
     private final KafkaProducer<String, String> producer;
