@@ -34,7 +34,7 @@ public class MoneyChangingRequest {
             TargetMembershipId targetMembershipId,
             MoneyChangingType moneyChangingType,
             ChangingMoneyAmount changingMoneyAmount,
-            MoneyChangingMoneyStatus moneyChangingMoneyStatus,
+            MoneyChangingStatus moneyChangingMoneyStatus,
             String uuid
             ) {
         return new MoneyChangingRequest(
@@ -82,8 +82,8 @@ public class MoneyChangingRequest {
     }
 
     @Value
-    public static class MoneyChangingMoneyStatus {
-        public MoneyChangingMoneyStatus(int value) {
+    public static class MoneyChangingStatus {
+        public MoneyChangingStatus(int value) {
             this.changingMoneyStatus = value;
         }
         int changingMoneyStatus ;

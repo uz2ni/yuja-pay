@@ -6,4 +6,6 @@ public interface IncreaseMoneyResultUseCase {
 
     MoneyChangingRequest increaseMoneyRequest(IncreaseMoneyResultCommand command);
 
+    MoneyChangingRequest increaseMoneyRequestAsync(IncreaseMoneyResultCommand command);
+
 }

@@ -12,7 +12,7 @@ public class MoneyChangingRequestMapper {
                 new MoneyChangingRequest.TargetMembershipId(moneyChangingRequestJpaEntity.getTargetMembershipId()),
                 new MoneyChangingRequest.MoneyChangingType(moneyChangingRequestJpaEntity.getMoneyChangingType()),
                 new MoneyChangingRequest.ChangingMoneyAmount(moneyChangingRequestJpaEntity.getMoneyAmount()),
-                new MoneyChangingRequest.MoneyChangingMoneyStatus(moneyChangingRequestJpaEntity.getChangingMoneyStatus()),
+                new MoneyChangingRequest.MoneyChangingStatus(moneyChangingRequestJpaEntity.getChangingMoneyStatus()),
                 moneyChangingRequestJpaEntity.getUuid()
 
         );

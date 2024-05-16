@@ -11,7 +11,7 @@ public interface IncreaseMoneyPort { // Adaptor 는 이 Port 인터페이스를 
             MoneyChangingRequest.TargetMembershipId targetMembershipId
             , MoneyChangingRequest.MoneyChangingType moneyChangingType
             , MoneyChangingRequest.ChangingMoneyAmount changingMoneyAmount
-            , MoneyChangingRequest.MoneyChangingMoneyStatus moneyChangingMoneyStatus
+            , MoneyChangingRequest.MoneyChangingStatus moneyChangingStatus
             , MoneyChangingRequest.Uuid uuid
     );
 

@@ -19,14 +19,14 @@ public class MoneyChangingRequestPersistenceAdaptor implements IncreaseMoneyPort
     private final SpringDataMemberMoneyRepository memberMoneyRepository;
 
     @Override
-    public MoneyChangingRequestJpaEntity createMoneyChangingRequest(MoneyChangingRequest.TargetMembershipId targetMembershipId, MoneyChangingRequest.MoneyChangingType moneyChangingType, MoneyChangingRequest.ChangingMoneyAmount changingMoneyAmount, MoneyChangingRequest.MoneyChangingMoneyStatus moneyChangingMoneyStatus, MoneyChangingRequest.Uuid uuid) {
+    public MoneyChangingRequestJpaEntity createMoneyChangingRequest(MoneyChangingRequest.TargetMembershipId targetMembershipId, MoneyChangingRequest.MoneyChangingType moneyChangingType, MoneyChangingRequest.ChangingMoneyAmount changingMoneyAmount, MoneyChangingRequest.MoneyChangingStatus moneyChangingStatus, MoneyChangingRequest.Uuid uuid) {
         return moneyChangingRequestRepository.save(
                 new MoneyChangingRequestJpaEntity(
                         targetMembershipId.getTargetMembershipId(),
                         moneyChangingType.getChangingType(),
                         changingMoneyAmount.getMoneyAmount(),
                         new Timestamp(System.currentTimeMillis()), // TODO: YYYY-MM-DD hh:mm:ss
-                        moneyChangingMoneyStatus.getChangingMoneyStatus(),
+                        moneyChangingStatus.getChangingMoneyStatus(),
                         UUID.randomUUID()
                 )
         );
