@@ -18,7 +18,7 @@ public class TaskProducer implements SendRechargingMoneyTaskPort {
     private final String topic;
 
     public TaskProducer(@Value("${kafka.clusters.bootstrapservers}") String bootstrapServers, // ${}한경변수는 각각의 서비스에서 가져옴(common의 것이 아님)
-                        @Value("${logging.topic}")String topic) {
+                        @Value("${task.topic}")String topic) {
         Properties props = new Properties();
         props.put("bootstrap.servers", bootstrapServers);
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
@@ -46,10 +46,10 @@ public class TaskProducer implements SendRechargingMoneyTaskPort {
         ProducerRecord<String, String> record = new ProducerRecord<String, String>(topic, key, jsonStringToProduce);
         producer.send(record, (metadata, exception) -> {
             if (exception == null) {
-                // System.out.println("Message sent successfully. Offset: " + metadata.offset());
+                System.out.println("Message sent successfully. Offset: " + metadata.offset());
             } else {
                 exception.printStackTrace();
-                // System.err.println("Failed to send message: " + exception.getMessage());
+                System.err.println("Failed to send message: " + exception.getMessage());
             }
         });
     }
