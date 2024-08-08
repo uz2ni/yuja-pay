@@ -1,6 +1,8 @@
 package com.yujapay.money.adapter.in.web;
 
 import com.yujapay.common.WebAdapter;
+import com.yujapay.money.application.port.in.CreateMemberMoneyCommand;
+import com.yujapay.money.application.port.in.CreateMemberMoneyUseCase;
 import com.yujapay.money.application.port.in.IncreaseMoneyResultCommand;
 import com.yujapay.money.application.port.in.IncreaseMoneyResultUseCase;
 import com.yujapay.money.domain.MoneyChangingRequest;
@@ -17,6 +19,8 @@ public class RequestMoneyChangingController {
     private final IncreaseMoneyResultUseCase increaseMoneyResultUseCase;
 
     // private final DecreaseMoneyResultUseCase decreaseMoneyResultUseCase;
+
+    private final CreateMemberMoneyUseCase createMemberMoneyUseCase;
 
     @PostMapping(path = "/money/increase")
     MoneyChangeResultDetail increaseMoneyChangeRequest(@RequestBody IncreaseMoneyChangingRequest request) {
@@ -76,5 +80,11 @@ public class RequestMoneyChangingController {
 //        }
 //        return registeredBankAccount;
         return null;
+    }
+
+    @PostMapping(path = "/money/create-member-money")
+    void createMemberMoney (@RequestBody CreateMemberMoneyRequest request) {
+        createMemberMoneyUseCase.createMemberMoney(
+                CreateMemberMoneyCommand.builder().membershipId(request.getMembershipId()).build());
     }
 }

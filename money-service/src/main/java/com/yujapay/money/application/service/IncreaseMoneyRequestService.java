@@ -4,8 +4,11 @@ import com.yujapay.common.CountDownLatchManager;
 import com.yujapay.common.RechargingMoneyTask;
 import com.yujapay.common.SubTask;
 import com.yujapay.common.UseCase;
+import com.yujapay.money.adapter.axon.command.MemberMoneyCreatedCommand;
 import com.yujapay.money.adapter.out.persistence.MemberMoneyJpaEntity;
 import com.yujapay.money.adapter.out.persistence.MoneyChangingRequestMapper;
+import com.yujapay.money.application.port.in.CreateMemberMoneyCommand;
+import com.yujapay.money.application.port.in.CreateMemberMoneyUseCase;
 import com.yujapay.money.application.port.in.IncreaseMoneyResultCommand;
 import com.yujapay.money.application.port.in.IncreaseMoneyResultUseCase;
 import com.yujapay.money.application.port.out.GetMembershipPort;
@@ -15,6 +18,7 @@ import com.yujapay.money.application.port.out.SendRechargingMoneyTaskPort;
 import com.yujapay.money.domain.MemberMoney;
 import com.yujapay.money.domain.MoneyChangingRequest;
 import lombok.RequiredArgsConstructor;
+import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -24,13 +28,14 @@ import java.util.UUID;
 @UseCase
 @RequiredArgsConstructor
 @Transactional
-public class IncreaseMoneyRequestService implements IncreaseMoneyResultUseCase {
+public class IncreaseMoneyRequestService implements IncreaseMoneyResultUseCase, CreateMemberMoneyUseCase {
 
     private final CountDownLatchManager countDownLatchManager;
     private final SendRechargingMoneyTaskPort sendRechargingMoneyTaskPort;
     private final GetMembershipPort getMembershipPort;
     private final IncreaseMoneyPort increaseMoneyPort;
     private final MoneyChangingRequestMapper mapper;
+    private final CommandGateway commandGateway;
 
     @Override
     public MoneyChangingRequest increaseMoneyRequest(IncreaseMoneyResultCommand command) {
@@ -185,4 +190,22 @@ public class IncreaseMoneyRequestService implements IncreaseMoneyResultUseCase {
 //            return null;
 //        }
 //    }
+
+    @Override
+    public void createMemberMoney(CreateMemberMoneyCommand command) {
+        MemberMoneyCreatedCommand axonCommand = new MemberMoneyCreatedCommand(command.getMembershipId());
+        // 1. axon fr -> axon server(event queue) 쓰는 구간
+        commandGateway.send(axonCommand).whenComplete((result, throwable) -> { // whenComplete : 요청 시키고 기다림
+            if (throwable != null) {
+                System.out.println("throwable = " + throwable);
+                throw new RuntimeException(throwable);
+            } else{
+                System.out.println("result = " + result);
+//                createMemberMoneyPort.createMemberMoney(
+//                        new MemberMoney.MembershipId(command.getMembershipId()),
+//                        new MemberMoney.MoneyAggregateIdentifier(result.toString())
+//                );
+            }
+        });
+    }
 }
