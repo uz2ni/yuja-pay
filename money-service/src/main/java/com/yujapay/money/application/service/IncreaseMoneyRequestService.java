@@ -7,10 +7,7 @@ import com.yujapay.common.UseCase;
 import com.yujapay.money.adapter.axon.command.MemberMoneyCreatedCommand;
 import com.yujapay.money.adapter.out.persistence.MemberMoneyJpaEntity;
 import com.yujapay.money.adapter.out.persistence.MoneyChangingRequestMapper;
-import com.yujapay.money.application.port.in.CreateMemberMoneyCommand;
-import com.yujapay.money.application.port.in.CreateMemberMoneyUseCase;
-import com.yujapay.money.application.port.in.IncreaseMoneyResultCommand;
-import com.yujapay.money.application.port.in.IncreaseMoneyResultUseCase;
+import com.yujapay.money.application.port.in.*;
 import com.yujapay.money.application.port.out.GetMembershipPort;
 import com.yujapay.money.application.port.out.IncreaseMoneyPort;
 import com.yujapay.money.application.port.out.MembershipStatus;
@@ -36,6 +33,7 @@ public class IncreaseMoneyRequestService implements IncreaseMoneyResultUseCase, 
     private final IncreaseMoneyPort increaseMoneyPort;
     private final MoneyChangingRequestMapper mapper;
     private final CommandGateway commandGateway;
+    private final CreateMemberMoneyPort createMemberMoneyPort;
 
     @Override
     public MoneyChangingRequest increaseMoneyRequest(IncreaseMoneyResultCommand command) {
@@ -201,10 +199,10 @@ public class IncreaseMoneyRequestService implements IncreaseMoneyResultUseCase, 
                 throw new RuntimeException(throwable);
             } else{
                 System.out.println("result = " + result);
-//                createMemberMoneyPort.createMemberMoney(
-//                        new MemberMoney.MembershipId(command.getMembershipId()),
-//                        new MemberMoney.MoneyAggregateIdentifier(result.toString())
-//                );
+                createMemberMoneyPort.createMemberMoney(
+                        new MemberMoney.MembershipId(command.getMembershipId()),
+                        new MemberMoney.MoneyAggregateIdentifier(result.toString())
+                );
             }
         });
     }
